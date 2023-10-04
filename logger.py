@@ -64,14 +64,31 @@ def change_contact():
                 count += 1
             id =+ 1
         if not count == 0:
-            id_inp = int(input("Введите id редактируемого контакта"))
+            id_inp = int(input("Введите id редактируемого контакта: ")) -1
             new_text = input("Введите, имя, фамилию, номер телефона с изменениями:  ").strip().split()
-            contacts[id_inp - 1] = ','.join(new_text) + '\n'
+            contacts[id_inp ] = ','.join(new_text) + '\n'
             f.seek(0)
             f.writelines(contacts) 
         else:
             print("Контакт не найден")
 
+
+def delete_contacts():
+    with open('data.txt', 'r+', encoding='UTF8') as f:
+        contacts = f.readlines()
+        id = 0
+        for contact in contacts:
+             print((id + 1), *contact.strip().split(','))
+             id += 1
+        del_lines = int(input("Введите номер строки для удаления: ")) - 1
+        with open('data.txt', 'w', encoding='UTF8') as f:
+            del_txt = contacts[del_lines].strip()
+            for contact in contacts:
+                if contact.strip() != del_txt:
+                    f.write(contact)
+            print("Строка успешно удалена")
+       
+        
 
 
 
