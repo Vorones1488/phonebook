@@ -35,8 +35,8 @@ def find_contact():
                 print(*ful_contact)
 
 
-def change():
-    with open('data.txt', 'r', encoding='UTF8') as f:
+def change_contact():
+    with open('data.txt', 'r+', encoding='UTF8') as f:
         contacts = f.readlines()
         while True:
             choice = input("для поиска по имени нажмите - 0 " \
@@ -54,14 +54,23 @@ def change():
                 break
         surnami = input(f'{name}')
         id = 0
+        count = 0
         print("Найденные контакты: \n")
-        print(f"id   Контакт")
+        print('id   Контакт')
         for contact in contacts:
-            id =+ 1
             ful_contact = contact.strip().split(',')
             if surnami.lower() == ful_contact[choice].lower():
                 print(id + 1, *ful_contact)
-            
+                count += 1
+            id =+ 1
+        if not count == 0:
+            id_inp = int(input("Введите id редактируемого контакта"))
+            new_text = input("Введите, имя, фамилию, номер телефона с изменениями:  ").strip().split()
+            contacts[id_inp - 1] = ','.join(new_text) + '\n'
+            f.seek(0)
+            f.writelines(contacts) 
+        else:
+            print("Контакт не найден")
 
 
 

@@ -1,10 +1,11 @@
-from logger import input_contact, print_contact, find_contact
+from logger import input_contact, print_contact, find_contact, change_contact
 def meny():
     text = '''
     Галвное меню:
 Введите 1 для записи;
 Введите 2 для вывода всего справочника;
 Введите 3 для поиска контакта;
+Введите 4 для редактирования контакта;
 Вывод меню 9;
 Введите 0 для завершения
         '''
@@ -17,7 +18,9 @@ def meny():
         if command == 2:
             print_contact()
         if command == 3:
-            find_contact()    
+            find_contact() 
+        if command == 4:
+            change_contact()       
         if command == 9:
             meny()
         if command == 0:
